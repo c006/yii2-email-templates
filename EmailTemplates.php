@@ -1,6 +1,5 @@
 <?php
 
-
 namespace c006\email;
 
 use c006\alerts\Alerts;
@@ -35,7 +34,7 @@ class EmailTemplates extends Widget
             }
         }
 
-        $this->array['company_name'] = (isset($this->array['company_name'])) ? $this->array['company_name'] : 'c006 Development';
+        $this->array['company_name'] = (isset($this->array['company_name'])) ? $this->array['company_name'] : '';
         $this->array['page_title'] = (isset($this->array['page_title'])) ? $this->array['page_title'] : '';
         $this->array['footer'] = (isset($this->array['footer'])) ? $this->array['footer'] : Assets::$FOOTER;
         $this->array['name'] = (isset($this->array['name'])) ? $this->array['name'] : '';
@@ -43,7 +42,6 @@ class EmailTemplates extends Widget
         $body = $this->render($this->template, ['array' => $this->array]);
 
         if ($this->text_email) {
-
             $body = preg_replace("/(<\/?\w+)(.*?>)/e", "strtolower('\\1') . '\\2'", $body);
             $body = str_replace('<div>', "<div>###P###", $body);
             $body = str_replace('<tr>', "<tr>###P###", $body);
@@ -53,8 +51,6 @@ class EmailTemplates extends Widget
             $body = strip_tags($body);
             $body = preg_replace('/[\s\t]+/', ' ', $body);
             $body = str_replace('###P###', PHP_EOL, $body);
-
-//            die($body);
 
             /* MAILER */
             Yii::$app->mailer->compose()

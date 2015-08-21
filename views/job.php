@@ -24,6 +24,5 @@ $array['callback'] = (isset($array['callback'])) ? $array['callback'] : 0;
 <?php endforeach ?>
 
 
-
 <p></p>
 <p>Thank you, I will look over the request.</p>
