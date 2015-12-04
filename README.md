@@ -1,4 +1,4 @@
-Yii2 Alerts
+Yii2 Email Templates
 ===================
 
 
@@ -11,13 +11,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 `
-php composer.phar require --prefer-dist "c006/yii2-alerts" "dev-master"
+php composer.phar require --prefer-dist "c006/yii2-email-templates" "v1"
 `
 
 or add
 
 `
-"c006/yii2-alerts": "dev-master"
+"c006/yii2-alerts": "v1"
 `
 
 to the require section of your `composer.json` file.
@@ -34,40 +34,11 @@ Required
 Options
 -------
 
-**message =>**  {string}  
-` Alert message (HTML) `
-
-**alert_type =>**  {string}  
-`      * alert-danger
-       * alert-warning
-       * alert-info
-       * alert-success `
-
-**close =>**  {boolean}  
-` Show close link for alert `
-
-**countdown =>**  {int}  
-` Automatically remove alert in X seconds `
 
 
 
 Usage
 -----
-
-Set message
->
-    <?php
-    Alerts::setMessage("Hello World");
-    ?>
-
-Display message
->
-        <?= Alerts::widget([
-                               'message'    => Alerts::getMessage(),
-                               'alert_type' => 'alert-warning',
-                               'close'      => TRUE,
-                               'countdown'  => 5]); ?>
-
 
 
 
