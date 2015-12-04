@@ -14,5 +14,4 @@ class Assets
 <p>Thank you,<br>4Pay Team -</p>';
 
 
-
 }
