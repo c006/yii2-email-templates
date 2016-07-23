@@ -6,39 +6,44 @@ Yii2 Email Templates
 Installation
 ------------
 
-The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-Either run
-
-`
-php composer.phar require --prefer-dist "c006/yii2-email-templates" "v1"
-`
-
-or add
-
-`
-"c006/yii2-alerts": "v1"
-`
-
-to the require section of your `composer.json` file.
+User `composer.json`
 
 
-Required
---------
+Composer.json
+------------
 
-+ ***jQuery***
+>
+    "repositories": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/c006/yii2-email-templates.git"
+        }
+      ]
+  
+  
+  
+  
+Setup
+------------
+  
+>
+    'modules'    => [
+        'user'            => [
+            'class'     => 'c006\email\Module'
+        ],
+    ],
+           
+            
+Requires
+-----------
 
-+ **yii \ widgets \ Bootstrap**
+
+` php composer.phar require --prefer-dist "c006/yii2-spinner" "dev-master" `
+
+` php composer.phar require --prefer-dist "c006/yii2-alerts" "dev-master" `
 
 
-Options
--------
-
-
-
-
-Usage
------
 
 
 
