@@ -63,37 +63,40 @@ class WidgetEmailer extends Widget
 
         $body = self::matchReplacements($body);
 
-
         if ($model->is_html == FALSE) {
             $body = preg_replace("/(<\/?\w+)(.*?>)/e", "strtolower('\\1') . '\\2'", $body);
             $body = preg_replace("/<style[\w\W]+?style>/", '', $body);
 
             $body = strip_tags($body);
-            $body = preg_replace('/\n(\s*\n){2,}/', PHP_EOL. PHP_EOL, $body);
-//            $body = preg_replace("/^\\s+/m", PHP_EOL, $body);
+            $body = preg_replace('/\n(\s*\n){2,}/', PHP_EOL . PHP_EOL, $body);
+            $body = preg_replace("/^\\s+/m", PHP_EOL, $body);
 
 //            die($body);
 
             /* MAILER */
-            Yii::$app->mailer->compose()
+
+            $mail = Yii::$app->mailer->compose()
                 ->setTo($this->array['email_to'])
                 ->setFrom($model->email_from)
+                ->setReplyTo($model->email_from)
                 ->setSubject($this->array['subject'])
-                ->setTextBody($body)
-//                ->setCC(Yii::$app->params['supportEmail'])
-                ->send();
+                ->setTextBody($body);
+
+//            print_r($mail); exit;
+            return $mail->send();
         } else {
             /* MAILER */
-            Yii::$app->mailer->compose()
+            $mail = Yii::$app->mailer->compose()
                 ->setTo($this->array['email_to'])
                 ->setFrom($model->email_from)
+                ->setReplyTo($model->email_from)
                 ->setSubject($this->array['subject'])
-                ->setHtmlBody($body)
-//                ->setCC(Yii::$app->params['supportEmail'])
-                ->send();
+                ->setHtmlBody($body);
+
+//            print_r($mail); exit;
+            return $mail->send();
         }
 
-        return TRUE;
     }
 
 
@@ -109,58 +112,90 @@ class WidgetEmailer extends Widget
 
         if (isset($matches[0])) {
             foreach ($matches[0] as $k => $v) {
-                $array[ preg_replace('/[{|}]/', '', $v) ] = $v;
+                $array[preg_replace('/[{|}]/', '', $v)] = $v;
             }
         }
 
         foreach ($array as $k => $v) {
             if (substr($k, 0, 3) == "IMG") {
-                $array[ $k ] = self::getImage(preg_replace('/[^0-9]/', '', $v));
+                $array[$k] = self::getImage(preg_replace('/[^0-9]/', '', $v));
             }
-            if ($k == "FNAME") {
-                $array[ $k ] = self::getUser('first_name');
+            if ($k == "FNAME" || $k == "FIRST_NAME") {
+                $array[$k] = (isset($this->array['first_name'])) ? $this->array['first_name'] : self::getUser('first_name');
             }
-            if ($k == "LNAME") {
-                $array[ $k ] = self::getUser('last_name');
+            if ($k == "LNAME" || $k == "LAST_NAME") {
+                $array[$k] = (isset($this->array['last_name'])) ? $this->array['first_name'] : self::getUser('last_name');
             }
             if ($k == "SECURITY") {
-                $array[ $k ] = (string)self::getUser('security') . '.' . substr(self::getUser('pin'), -4);
+                $array[$k] = (string)self::getUser('security') . '.' . substr(self::getUser('pin'), -4);
             }
-            if ($k == "DOMAIN") {
-                $array[ $k ] = self::getDomain();
+            if ($k == "DOMAIN" || $k == "URL") {
+                $array[$k] = self::getDomain();
             }
             if ($k == "SITE_NAME") {
-                $array[ $k ] = self::getSiteName();
+                $array[$k] = self::getSiteName();
             }
 
+            /* ~ ECOMM */
+            if ($k == "SHIPPING") {
+                $array[$k] = $this->array['order_shipping'];
+            }
+            if ($k == "BILLING") {
+                $array[$k] = $this->array['order_billing'];
+            }
+            if ($k == "ORDER_ITEMS") {
+                $array[$k] = $this->array['order_items'];
+            }
 
             /* ~ CUSTOM */
-
             if ($k == "FUNDS_ADDED") {
-                $array[ $k ] = $this->array['funds_added'];
+                $array[$k] = $this->array['funds_added'];
             }
             if ($k == "BALANCE") {
-                $array[ $k ] = $this->array['balance'];
+                $array[$k] = $this->array['balance'];
             }
             if ($k == "TRANSACTION_ID") {
-                $array[ $k ] = $this->array['transaction_id'];
+                $array[$k] = $this->array['transaction_id'];
             }
             if ($k == "MESSAGE") {
-                $array[ $k ] = $this->array['message'];
+                $array[$k] = $this->array['message'];
             }
             if ($k == "TO") {
-                $array[ $k ] = $this->array['to'];
+                $array[$k] = $this->array['to'];
             }
             if ($k == "SECURITY_KEY") {
-                $array[ $k ] = $this->array['security_key'];
+                $array[$k] = $this->array['security_key'];
             }
             if ($k == "SECURITY_PIN") {
-                $array[ $k ] = $this->array['security_pin'];
+                $array[$k] = $this->array['security_pin'];
             }
             if ($k == "LINK") {
-                $array[ $k ] = $this->array['link'];
+                $array[$k] = $this->array['link'];
             }
-
+            if ($k == "TOKEN") {
+                $array[$k] = $this->array['token'];
+            }
+            if ($k == "TASKS") {
+                $array[$k] = $this->array['tasks'];
+            }
+            if ($k == "DATE_DUE") {
+                $array[$k] = $this->array['date_due'];
+            }
+            if ($k == "OVERVIEW") {
+                $array[$k] = $this->array['overview'];
+            }
+            if ($k == "NOTE") {
+                $array[$k] = $this->array['note'];
+            }
+            if ($k == "JOB_NAME") {
+                $array[$k] = $this->array['job_name'];
+            }
+            if ($k == "MAIN_HEADER") {
+                $array[$k] = $this->array['main_header'];
+            }
+            if ($k == "SUB_HEADER") {
+                $array[$k] = $this->array['sub_header'];
+            }
         }
 
         foreach ($array as $k => $v) {
@@ -201,7 +236,7 @@ class WidgetEmailer extends Widget
             ->asArray()
             ->one();
         if (sizeof($model)) {
-            return $model[ $column ];
+            return $model[$column];
         }
 
         return '';
@@ -213,7 +248,10 @@ class WidgetEmailer extends Widget
      */
     private function getDomain()
     {
-        return Yii::$app->params['siteUrl'];
+
+        $url = (isset($_SERVER['HTTPS'])) ? 'https://' : 'http://';
+
+        return $url . $_SERVER['HTTP_HOST'];
     }
 
     /**

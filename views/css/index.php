@@ -17,9 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create  Css'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create  Css'), ['create'], ['class' => 'btn btn-secondary']) ?>
 
-        <?= Html::a(Yii::t('app', 'Online CSS Generators'), 'http://www.sitepoint.com/10-best-css3-code-generators/', ['class' => 'btn btn-success float-right', 'target' => '_blank']) ?>
+        <?= Html::a(Yii::t('app', 'Online CSS Generators'), 'http://www.sitepoint.com/10-best-css3-code-generators/', ['class' => 'btn btn-secondary float-right', 'target' => '_blank']) ?>
     </p>
 
     <?= GridView::widget([

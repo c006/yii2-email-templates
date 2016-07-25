@@ -7,6 +7,14 @@ use yii\db\Migration;
 
 class m000000_000000_c006_email extends Migration
 {
+
+    /**
+     *  ~ Console command ~
+     *
+     * php yii migrate --migrationPath=@vendor/c006/yii2-email/migrations
+     *
+     */
+
     /**
      *
      */
@@ -94,7 +102,7 @@ Hi {FNAME}
 
 Account login: {DOMAIN}/user
 
-dev.c006.us
+TheTruthTree.org
 ', 'is_html' => '1']);
         $this->insert('{{%email_templates}}', ['id' => '2', 'name' => 'Login Update', 'template_name' => 'login-update', 'email_from' => 'jchambers.dev@gmail.com', 'updated' => '2015-08-24 14:26:31', 'html' => '.', 'is_html' => '0']);
         $this->insert('{{%email_templates}}', ['id' => '3', 'name' => 'Order Receipt', 'template_name' => 'order-receipt', 'email_from' => 'jchambers.dev@gmail.com', 'updated' => '2015-08-24 14:28:08', 'html' => '.', 'is_html' => '1']);
