@@ -1,12 +1,11 @@
 {
   "name": "c006/yii2-email-templates",
-  "description": "Access email templates",
+  "description": "DB driven email templates",
   "type": "yii2-extension",
   "keywords": [
     "yii2",
     "extension",
-    "widgets",
-    "alert"
+    "widgets"
   ],
   "license": "MIT",
   "authors": [
@@ -15,6 +14,11 @@
       "email": "jchambers.dev@gmail.com"
     }
   ],
+  "require": {
+    "c006/yii2-core": "*",
+    "c006/yii2-alerts": "*",
+    "c006/yii2-yii2-spinner": "*"
+  },
   "autoload": {
     "psr-4": {
       "c006\\email\\": ""

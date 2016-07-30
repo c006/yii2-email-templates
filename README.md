@@ -38,13 +38,11 @@ Setup
 Requires
 -----------
 
+` php composer.phar require --prefer-dist "c006/yii2-core" "*" `
 
-` php composer.phar require --prefer-dist "c006/yii2-spinner" "dev-master" `
+` php composer.phar require --prefer-dist "c006/yii2-spinner" "*" `
 
-` php composer.phar require --prefer-dist "c006/yii2-alerts" "dev-master" `
-
-
-
+` php composer.phar require --prefer-dist "c006/yii2-alerts" "*" `
 
 
 
