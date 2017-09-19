@@ -1,0 +1,27 @@
+{
+  "name": "c006/yii2-email-templates",
+  "description": "DB driven email templates",
+  "type": "yii2-extension",
+  "keywords": [
+    "yii2",
+    "extension",
+    "widgets"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jon Chambers",
+      "email": "jchambers.dev@gmail.com"
+    }
+  ],
+  "require": {
+    "c006/yii2-core": "*",
+    "c006/yii2-alerts": "*",
+    "c006/yii2-submit-spinner": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "c006\\email\\": ""
+    }
+  }
+}
